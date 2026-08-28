@@ -1,0 +1,17 @@
+node_modules/
+.env
+
+# Dumps de banco — podem conter dados reais de pacientes (dado de
+# saúde). Nunca devem ir pro histórico do repositório.
+*.dump
+backup_completo.dump
+sql/bkp/
+
+# Documentos digitalizados de pacientes (termos de consentimento
+# assinados, etc.) — ficam só no servidor, nunca no repositório.
+uploads/
+
+# Chave privada de licença — NUNCA deve ir pro repositório nem ser
+# entregue a um cliente. É ela que assina licenças válidas; se vazar,
+# qualquer pessoa consegue gerar licença pro seu sistema.
+licenca-chave-privada.pem
