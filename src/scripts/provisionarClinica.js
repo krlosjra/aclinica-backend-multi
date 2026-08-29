@@ -43,7 +43,10 @@ const fs = require('fs');
 const path = require('path');
 const { Client } = require('pg');
 const bcrypt = require('bcryptjs');
-require('dotenv').config();
+// path explícito (não o padrão "./.env") — assim funciona não importa de
+// qual pasta você rode o script (ex: de dentro de src/scripts/, o dotenv
+// padrão procuraria ".env" ali dentro e não acharia nada).
+require('dotenv').config({ path: path.join(__dirname, '../../.env') });
 
 function parseArgs() {
   const args = {};
