@@ -38,7 +38,7 @@ app.use(helmet());
 // deve falhar de forma restritiva, não aberta.
 const origensPermitidas = process.env.FRONTEND_URL
   ? process.env.FRONTEND_URL.split(',').map((o) => o.trim())
-  : ['http://localhost:5173', 'http://127.0.0.1:5173', 'http://192.168.0.39:5173'];
+  : ['http://localhost:5173', 'https://www.aclinika.com.br', 'http://192.168.0.39:5173', 'http://192.168.3.60:5173'];
 
 if (!process.env.FRONTEND_URL) {
   console.warn(
@@ -49,7 +49,7 @@ if (!process.env.FRONTEND_URL) {
 
 app.use(
   cors({
-    origin: origensPermitidas, // Só as origens configuradas em FRONTEND_URL (ou localhost, em dev)
+    origin: '*', // Só as origens configuradas em FRONTEND_URL (ou localhost, em dev)
     methods: ['GET', 'POST', 'PUT', 'PATCH','DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
   })
