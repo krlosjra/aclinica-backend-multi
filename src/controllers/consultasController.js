@@ -404,7 +404,7 @@ async function atualizarStatus(req, res) {
       // pagamento em cartão ou PIX SEMPRE inclui o imposto; só quando é
       // 100% dinheiro é que vira opcional (via incluir_imposto no body).
       const config = await client.query(
-        'SELECT impostos_ativos, aliquota_ibs, aliquota_cbs FROM clinica_config WHERE id = 1'
+        'SELECT impostos_ativos, aliquota_ibs, aliquota_cbs FROM configuracao_clinica WHERE id = 1'
       );
       if (config.rows.length > 0 && config.rows[0].impostos_ativos) {
         const pagamentoTemCartaoOuPix = valorCartao > 0 || valorPix > 0;
