@@ -19,6 +19,7 @@ const configuracaoRoutes = require('./routes/configuracaoRoutes');
 const examesRoutes = require('./routes/examesRoutes');
 const laudosRoutes = require('./routes/laudosRoutes');
 const licencaRoutes = require('./routes/licencaRoutes');
+const acessosRoutes = require('./routes/acessosRoutes');
 const verificarLicenca = require('./middlewares/licenca');
 const resolverTenant = require('./middlewares/tenant');
 const caixaSessaoService = require('./services/caixaSessaoService');
@@ -76,6 +77,12 @@ app.use('/auth/registrar-paciente', limitadorAuth);
 app.get('/', (req, res) => {
   res.json({ mensagem: 'API da Clínica no ar 🚀' });
 });
+
+// Contador de acessos do site institucional (aclinika.com.br). Fica
+// aqui, ANTES do resolverTenant/verificarLicenca, porque é uma rota
+// pública do site — não pertence a nenhuma clínica, então usa o banco
+// mestre (ver acessosController.js) em vez do banco por tenant.
+app.use('/acessos', acessosRoutes);
 
 // Multi-tenant: resolve qual clínica (e portanto qual banco) atende
 // esta requisição — pelo token, se já autenticado, ou pelo domínio do
